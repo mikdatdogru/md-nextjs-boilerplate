@@ -1,0 +1,6 @@
+export const LOCALE_SET = 'LOCALE_SET';
+export const LOCALE_GET = 'LOCALE_GET';
+
+export const GET_MOVIE_FETCH = 'GET_MOVIE_FETCH';
+export const GET_MOVIE_RECEIVE = 'GET_MOVIE_RECEIVE';
+export const GET_MOVIE_FAILURE = 'GET_MOVIE_FAILURE';
