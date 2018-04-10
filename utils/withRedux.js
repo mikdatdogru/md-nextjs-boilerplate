@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect, Provider } from 'react-redux';
+import { initialStore } from '../utils';
 
 const __NEXT_REDUX_STORE__ = '__NEXT_REDUX_STORE__';
 
@@ -22,10 +23,10 @@ const getOrCreateStore = (initStore, initialState) => {
 
 export default (...args) => Component => {
   // First argument is initStore, the rest are redux connect arguments and get passed
-  const [initStore, ...connectArgs] = args;
+  const [...connectArgs] = args;
 
   const ComponentWithRedux = (props = {}) => {
-    const { store, initialProps, initialState } = props;
+    const { initialProps, initialState } = props;
 
     // Connect page to redux with connect arguments
     const ConnectedComponent = connect(...connectArgs)(Component);
@@ -35,21 +36,23 @@ export default (...args) => Component => {
     return React.createElement(
       Provider,
       {
-        store: store && store.dispatch ? store : getOrCreateStore(initStore, initialState),
+        store:
+          initialStore && initialStore.dispatch
+            ? initialStore
+            : getOrCreateStore(initialStore, initialState),
       },
       React.createElement(ConnectedComponent, initialProps),
     );
   };
 
   ComponentWithRedux.propTypes = {
-    store: PropTypes.objectOf(PropTypes.any).isRequired,
     initialProps: PropTypes.objectOf(PropTypes.any).isRequired,
     initialState: PropTypes.objectOf(PropTypes.any).isRequired,
   };
 
   ComponentWithRedux.getInitialProps = async (props = {}) => {
     const isServer = checkServer();
-    const store = getOrCreateStore(initStore);
+    const store = getOrCreateStore(initialStore);
 
     // Run page getInitialProps with store and isServer
     const initialProps = Component.getInitialProps

@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import devToolsEnhancer from 'remote-redux-devtools';
 import thunk from 'redux-thunk';
 
-import rootReducer from './redux/modules';
+import rootReducer from '../redux/modules';
 
 const middlewares = [thunk];
 
@@ -26,12 +26,11 @@ if (process.env.NODE_ENV === 'development') {
 const store = createStore(rootReducer, {}, compose(...composed));
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./redux/modules', () => {
+  module.hot.accept('../redux/modules', () => {
     // eslint-disable-next-line
-    const nextRootReducer = require('./redux/modules').default;
+    const nextRootReducer = require('../redux/modules').default;
     store.replaceReducer(nextRootReducer);
   });
 }
 
-
-export const initStore = () => store;
+export default () => store;

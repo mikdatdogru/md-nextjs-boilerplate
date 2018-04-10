@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
-import Layout from '../components/MyLayout';
+import Layout from '../../components/Layout';
 
-import { initStore } from '../store';
-import { getMovie } from '../actions/common';
-import { withRedux } from '../utils';
+import { getMovie } from '../../actions/common';
+import { withRedux } from '../../utils/index';
 
 class Post extends Component {
   constructor(props) {
@@ -38,9 +37,7 @@ Post.propTypes = {
 };
 Post.defaultProps = {};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getMovie: bindActionCreators(getMovie, dispatch),
-  };
-};
-export default withRedux(initStore, null, mapDispatchToProps)(Post);
+const mapDispatchToProps = dispatch => ({
+  getMovie: bindActionCreators(getMovie, dispatch),
+});
+export default withRedux(null, mapDispatchToProps)(Post);

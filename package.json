@@ -23,22 +23,26 @@
   },
   "homepage": "https://github.com/mikdatdogru/testBrite#readme",
   "dependencies": {
+    "@zeit/next-css": "^0.1.5",
+    "@zeit/next-sass": "^0.1.2",
     "axios": "^0.18.0",
+    "bootstrap": "^4.1.0",
     "express": "^4.16.3",
     "isomorphic-unfetch": "^2.0.0",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "next": "^5.1.0",
+    "node-sass": "^4.8.3",
     "prop-types": "^15.6.1",
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
     "react-markdown": "^3.3.0",
     "react-redux": "^5.0.7",
+    "reactstrap": "^5.0.0-beta.3",
     "redux": "^3.7.2",
-    "remote-redux-devtools": "^0.5.12",
+    "redux-devtools-extension": "^2.13.2",
     "redux-thunk": "^2.2.0",
-    "redux-devtools-extension": "^2.13.2"
-
+    "remote-redux-devtools": "^0.5.12"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",

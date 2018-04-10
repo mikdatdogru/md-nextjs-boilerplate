@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux';
 import fetch from 'isomorphic-unfetch';
-import Layout from '../components/MyLayout';
-import { initStore } from '../store';
-import {getMovie} from '../actions/common';
-import { withRedux } from '../utils';
+import Layout from '../components/Layout';
+import { withRedux } from '../utils/index';
+
+
 
 const Index = props => (
   <Layout>
@@ -57,10 +56,8 @@ Index.propTypes = {
 };
 Index.defaultProps = {};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    /*addCount: bindActionCreators(addCount, dispatch),
-    startClock: bindActionCreators(startClock, dispatch),*/
-  };
-};
-export default withRedux(initStore, null, mapDispatchToProps)(Index);
+const mapDispatchToProps = dispatch => ({
+  /* addCount: bindActionCreators(addCount, dispatch),
+    startClock: bindActionCreators(startClock, dispatch), */
+});
+export default withRedux(null, mapDispatchToProps)(Index);

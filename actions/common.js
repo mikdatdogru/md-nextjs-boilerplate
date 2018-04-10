@@ -1,9 +1,4 @@
-import {
-  GET_MOVIE_FAILURE,
-  GET_MOVIE_FETCH,
-  GET_MOVIE_RECEIVE,
-  LOCALE_SET,
-} from '../redux/types';
+import { GET_MOVIE_FAILURE, GET_MOVIE_FETCH, GET_MOVIE_RECEIVE, LOCALE_SET } from '../redux/types';
 import { localStorageData } from '../utils/helper';
 
 import { api } from '../utils';
@@ -35,15 +30,11 @@ export const getMovieFailure = data => ({
 });
 
 export function getMovie(data) {
-
   return dispatch => {
-
     dispatch(getMovieFetch(data));
     return api
       .getMovie(data)
       .then(res => {
-
-
         dispatch(getMovieReceive(res.data));
 
         return res;
