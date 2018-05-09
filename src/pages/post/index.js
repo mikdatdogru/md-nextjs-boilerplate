@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux';
 import Layout from '../../components/Layout';
 
 import { getMovie } from '../../actions/common';
-import { withRedux } from '../../utils/index';
+import { withRedux, store } from '../../utils/index';
+import pageWithIntl from '../../components/PageWithIntl';
 
-class Post extends Component {
+class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -24,7 +25,7 @@ class Post extends Component {
   }
 }
 
-Post.getInitialProps = async context => {
+Index.getInitialProps = async context => {
   const { id } = context.query;
 
   const movie = await context.store.dispatch(getMovie(id));
@@ -32,12 +33,12 @@ Post.getInitialProps = async context => {
   return { show: movie.data };
 };
 
-Post.propTypes = {
+Index.propTypes = {
   show: PropTypes.objectOf(PropTypes.any).isRequired,
 };
-Post.defaultProps = {};
+Index.defaultProps = {};
 
 const mapDispatchToProps = dispatch => ({
   getMovie: bindActionCreators(getMovie, dispatch),
 });
-export default withRedux(null, mapDispatchToProps)(Post);
+export default pageWithIntl(withRedux(store, null, mapDispatchToProps)(Index));

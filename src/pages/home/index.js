@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch';
-import Layout from '../components/Layout';
-import { withRedux } from '../utils/index';
+import { bindActionCreators } from 'redux';
+import Layout from '../../components/Layout';
+import { withRedux, store } from '../../utils/index';
+import pageWithIntl from '../../components/PageWithIntl';
 
+import { getMovieList } from '../../actions/common';
 
-
-const Index = props => (
+const Home = props => (
   <Layout>
     <h1>Batman TV Shows</h1>
     <ul>
@@ -40,24 +42,25 @@ const Index = props => (
   </Layout>
 );
 
-Index.getInitialProps = async () => {
+Home.getInitialProps = async context => {
   const res = await fetch('https://api.tvmaze.com/search/shows?q=batman');
   const data = await res.json();
 
   console.log(`Show data fetched. Count: ${data.length}`);
 
+  const movie = await context.store.dispatch(getMovieList('batman'));
+
   return {
-    shows: data,
+    shows: movie.data,
   };
 };
 
-Index.propTypes = {
+Home.propTypes = {
   shows: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
-Index.defaultProps = {};
+Home.defaultProps = {};
 
 const mapDispatchToProps = dispatch => ({
-  /* addCount: bindActionCreators(addCount, dispatch),
-    startClock: bindActionCreators(startClock, dispatch), */
+  getMovieList: bindActionCreators(getMovieList, dispatch),
 });
-export default withRedux(null, mapDispatchToProps)(Index);
+export default pageWithIntl(withRedux(store, null, mapDispatchToProps)(Home));

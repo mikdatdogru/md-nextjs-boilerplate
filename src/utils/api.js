@@ -16,4 +16,9 @@ export default {
       method: 'get',
       url: `https://api.tvmaze.com/shows/${id}`,
     }).then(res => res),
+  getMovieList: search =>
+    axios({
+      method: 'get',
+      url: `https://api.tvmaze.com/search/shows?q=${search}`,
+    }).then(res => res),
 };
