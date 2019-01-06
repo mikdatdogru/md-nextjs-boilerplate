@@ -13,8 +13,8 @@
 ### Installation
 Clone repo: 
 ```sh
-git clone https://github.com/ooade/NextSimpleStarter.git
-cd NextSimpleStarter
+git clone https://github.com/mikdatdogru/md-nextjs-boilerplate.git
+cd md-nextjs-boilerplate
 ```
 
 Make it your own:
@@ -27,31 +27,28 @@ Install the dependencies:
 ```sh
 yarn install
 ```
-or
-```sh
-npm install
-```
+
 
 ### Development Workflow
 Start a live-reload development server:
 ```sh
 yarn dev
 ```
-or
-```sh
-npm run dev
-```
+
 
 Generate a production build:
 ```sh
 yarn build
 ```
-or
+
+
+Code beautifier
 ```sh
-npm run build
+yarn lint:fix && yarn prettier 
 ```
+
 ### Deployment
-[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/ooade/NextSimpleStarter)
+[![Deploy to now](https://deploy.now.sh/static/button.svg)](https://deploy.now.sh/?repo=https://github.com/mikdatdogru/md-nextjs-boilerplate)
 
 <details>
 	<summary>heroku</summary>
