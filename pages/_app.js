@@ -1,47 +1,39 @@
-import App, { Container } from 'next/app';
-import React from 'react';
-import withReduxStore from '../utils/with-redux-store';
-import { Provider } from 'react-redux';
-import { IntlProvider, addLocaleData } from 'react-intl';
+import React from 'react'
+import Head from 'next/head'
+import { Provider } from 'react-redux'
+import App, { Container } from 'next/app'
+import withRedux from 'next-redux-wrapper'
 
-// Register React Intl's locale data for the user's locale in the browser. This
-// locale data was added to the page by `pages/_document.js`. This only happens
-// once, on initial page load in the browser.
-if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
-  Object.keys(window.ReactIntlLocaleData).forEach(lang => {
-    addLocaleData(window.ReactIntlLocaleData[lang]);
-  });
-}
+import initStore from '../utils/store'
 
-class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx }) {
-    let pageProps = {};
+/* debug to log how the store is being used */
+export default withRedux(initStore, {
+	debug: typeof window !== 'undefined' && process.env.NODE_ENV !== 'production'
+})(
+	class MyApp extends App {
+		static async getInitialProps({ Component, ctx }) {
+			return {
+				pageProps: {
+					// Call page-level getInitialProps
+					...(Component.getInitialProps
+						? await Component.getInitialProps(ctx)
+						: {})
+				}
+			}
+		}
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
-
-    // Get the `locale` and `messages` from the request object on the server.
-    // In the browser, use the same values that the server serialized.
-    const { req } = ctx;
-    const { locale, messages } = req || window.__NEXT_DATA__.props.pageProps;
-
-    return { pageProps, locale, messages };
-  }
-
-  render() {
-    const { Component, pageProps, reduxStore, locale, messages } = this.props;
-    const now = Date.now();
-    return (
-      <Container>
-        <Provider store={reduxStore}>
-          <IntlProvider locale={locale} messages={messages} initialNow={now}>
-            <Component {...pageProps} />
-          </IntlProvider>
-        </Provider>
-      </Container>
-    );
-  }
-}
-
-export default withReduxStore(MyApp);
+		render() {
+			const { Component, pageProps, store } = this.props
+			return (
+				<Container>
+					<Head>
+						<title>Todo App</title>
+					</Head>
+					<Provider store={store}>
+						<Component {...pageProps} />
+					</Provider>
+				</Container>
+			)
+		}
+	}
+)

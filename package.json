@@ -1,32 +1,32 @@
 {
-  "name": "with-redux",
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "node server.js",
-    "build": "next build && node ./scripts/default-lang",
-    "start": "NODE_ENV=production PORT=1909 node server.js",
-    "start:next": "next start src -p 1909",
-    "prettier": "prettier --write ./**/*.js",
-    "pm2-next": "pm2 start npm --name \"next\" -- start"
-  },
-  "dependencies": {
-    "accepts": "^1.3.5",
-    "babel-plugin-react-intl": "^2.4.0",
-    "express": "^4.16.3",
-    "glob": "^7.1.2",
-    "intl": "^1.2.5",
-    "isomorphic-unfetch": "^2.1.0",
-    "next": "^6.1.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-intl": "^2.4.0",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.5",
-    "redux-thunk": "^2.3.0"
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "prettier": "^1.13.7"
-  }
+	"name": "next-simple-starter",
+	"version": "1.0.0",
+	"repository": {
+		"url": "https://github.com/mikdatdogru/md-nextjs-boilerplate"
+	},
+	"license": "MIT",
+	"dependencies": {
+		"isomorphic-fetch": "^2.2.1",
+		"next": "^7.0.0",
+		"next-redux-wrapper": "^2.0.0",
+		"react": "^16.6.3",
+		"react-dom": "^16.6.3",
+		"react-redux": "^6.0.0",
+		"redux": "^3.7.2"
+	},
+	"devDependencies": {
+		"eslint": "^5.12.0",
+		"eslint-plugin-react": "^7.12.3",
+		"prettier": "^1.15.3",
+		"workbox-webpack-plugin": "^3.4.1"
+	},
+	"scripts": {
+		"dev": "node server",
+		"build": "next build",
+		"start": "NODE_ENV=production node server",
+		"lint": "eslint src",
+		"lint:fix": "eslint src --fix",
+		"prettier": "prettier --write \"{.next,node_modules,static}/**/*.js\""
+
+	}
 }

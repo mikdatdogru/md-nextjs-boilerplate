@@ -1,40 +1,33 @@
-import Document, { Head, Main, NextScript } from 'next/document';
+import React from 'react'
+import Document, { Head, Main, NextScript } from 'next/document'
 
-// The document (which is SSR-only) needs to be customized to expose the locale
-// data for the user's locale for React Intl to work in the browser.
-export default class IntlDocument extends Document {
-  static async getInitialProps(context) {
-    const props = await super.getInitialProps(context);
-    const {
-      req: { locale, localeDataScript },
-    } = context;
-    return {
-      ...props,
-      locale,
-      localeDataScript,
-    };
-  }
-
-  render() {
-    // Polyfill Intl API for older browsers
-    const polyfill = `https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${
-      this.props.locale
-    }`;
-
-    return (
-      <html>
-        <Head />
-        <body>
-          <Main />
-          <script src={polyfill} />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: this.props.localeDataScript,
-            }}
-          />
-          <NextScript />
-        </body>
-      </html>
-    );
-  }
+export default class MyDocument extends Document {
+	render() {
+		return (
+			<html style={{ background: '#EEE', color: '#444' }}>
+				<Head>
+					<meta
+						name="viewport"
+						content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,minimal-ui"
+					/>
+					<meta name="theme-color" content="#673ab7" />
+					<meta
+						httpEquiv="Content-Security-Policy"
+						content="upgrade-insecure-requests"
+					/>
+					<link rel="manifest" href="static/manifest.json" />
+					<link rel="icon" href="static/img/favicon.ico" />
+					<link
+						rel="stylesheet"
+						href="https://code.getmdl.io/1.3.0/material.deep_purple-blue.min.css"
+					/>
+				</Head>
+				<body>
+					<Main />
+					<NextScript />
+					<script defer src="https://code.getmdl.io/1.3.0/material.min.js" />
+				</body>
+			</html>
+		)
+	}
 }
