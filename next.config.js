@@ -1,5 +1,5 @@
-const path = require('path')
-const WorkboxPlugin = require('workbox-webpack-plugin')
+const path = require('path');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
 	webpack: (config, { buildId, dev }) => {
@@ -8,14 +8,14 @@ module.exports = {
 		 * on our main entry file :)
 		 * Reason: https://github.com/ooade/NextSimpleStarter/issues/32
 		 */
-		const oldEntry = config.entry
+		const oldEntry = config.entry;
 
 		config.entry = () =>
 			oldEntry().then(entry => {
 				entry['main.js'] &&
-					entry['main.js'].push(path.resolve('./utils/offline'))
-				return entry
-			})
+					entry['main.js'].push(path.resolve('./utils/offline'));
+				return entry;
+			});
 
 		/* Enable only in Production */
 		if (!dev) {
@@ -30,9 +30,9 @@ module.exports = {
 						'static/**/*.{png,jpg,ico}' // Precache all static assets by default
 					]
 				})
-			)
+			);
 		}
 
-		return config
+		return config;
 	}
-}
+};

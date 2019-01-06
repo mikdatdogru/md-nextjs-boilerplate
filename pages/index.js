@@ -1,9 +1,9 @@
-import 'isomorphic-fetch'
-import React from 'react'
-import { connect } from 'react-redux'
+import 'isomorphic-fetch';
+import React from 'react';
+import { connect } from 'react-redux';
 
-import Fork from '../components/Fork'
-import Todo from '../components/Todo'
+import Fork from '../components/Fork';
+import Todo from '../components/Todo';
 
 class Index extends React.Component {
 	static async getInitialProps({ store }) {
@@ -11,13 +11,13 @@ class Index extends React.Component {
 		// store.dispatch({ type: 'ADD_TODO', text: 'It works!' });
 		const res = await fetch(
 			'https://api.github.com/repos/ooade/NextSimpleStarter'
-		)
-		const json = await res.json()
-		return { stars: json.stargazers_count }
+		);
+		const json = await res.json();
+		return { stars: json.stargazers_count };
 	}
 
 	render() {
-		const { stars } = this.props
+		const { stars } = this.props;
 		return (
 			<div>
 				<Fork stars={stars} />
@@ -25,8 +25,8 @@ class Index extends React.Component {
 					<Todo />
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
-export default connect()(Index)
+export default connect()(Index);

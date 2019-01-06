@@ -1,7 +1,7 @@
-import { ADD_TODO, REMOVE_TODO } from '../actions'
+import { ADD_TODO, REMOVE_TODO } from '../actions';
 
 export default function(state = [], action) {
-	const { type, text, todo } = action
+	const { type, text, todo } = action;
 
 	switch (type) {
 		case ADD_TODO:
@@ -13,10 +13,10 @@ export default function(state = [], action) {
 						.substring(2),
 					text
 				}
-			]
+			];
 		case REMOVE_TODO:
-			return state.filter(i => i !== todo)
+			return state.filter(i => i !== todo);
 		default:
-			return state
+			return state;
 	}
 }

@@ -1,26 +1,29 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { addTodo, removeTodo } from '../actions/todo'
-import TodoItem from './TodoItem'
+import { addTodo, removeTodo } from '../actions/todo';
+import TodoItem from './TodoItem';
 
 class Todo extends React.Component {
-	state = {
-		text: ''
+	constructor(props) {
+		super(props);
+		this.state = {
+			test: 1
+		};
 	}
 
 	addTodos = e => {
-		e.preventDefault()
+		e.preventDefault();
 
 		if (this.state.text !== '') {
-			this.props.addTodo(this.state.text)
-			this.setState({ text: '' })
+			this.props.addTodo(this.state.text);
+			this.setState({ text: '' });
 		}
-	}
+	};
 
 	removeTodo = todo => {
-		this.props.removeTodo(todo)
-	}
+		this.props.removeTodo(todo);
+	};
 
 	render() {
 		return (
@@ -75,18 +78,18 @@ class Todo extends React.Component {
 						}
 					`}</style>
 			</div>
-		)
+		);
 	}
 }
-
 
 const mapStateToProps = state => ({
 	todos: state.todos
 });
 const mapDispatchToProps = {
-	addTodo, removeTodo
+	addTodo,
+	removeTodo
 };
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+	mapStateToProps,
+	mapDispatchToProps
 )(Todo);

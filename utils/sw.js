@@ -1,9 +1,9 @@
-workbox.core.setCacheNameDetails({ prefix: 'next-ss' })
+workbox.core.setCacheNameDetails({ prefix: 'next-ss' });
 
-workbox.skipWaiting()
-workbox.clientsClaim()
+workbox.skipWaiting();
+workbox.clientsClaim();
 
-workbox.precaching.suppressWarnings()
+workbox.precaching.suppressWarnings();
 /**
  * Ignore the non-important files added as a result of
  * webpack's publicPath thingy, for now...
@@ -23,7 +23,7 @@ workbox.precaching.precacheAndRoute(
 			m.url !== 'build-manifest.json'
 	),
 	{}
-)
+);
 
 workbox.routing.registerRoute(
 	/[.](png|jpg|css)/,
@@ -34,7 +34,7 @@ workbox.routing.registerRoute(
 		}
 	}),
 	'GET'
-)
+);
 
 workbox.routing.registerRoute(
 	/^https:\/\/code\.getmdl\.io.*/,
@@ -42,7 +42,7 @@ workbox.routing.registerRoute(
 		cacheName: 'lib-cache'
 	}),
 	'GET'
-)
+);
 
 // Fetch the root route as fast as possible
 workbox.routing.registerRoute(
@@ -51,7 +51,7 @@ workbox.routing.registerRoute(
 		cacheName: 'root'
 	}),
 	'GET'
-)
+);
 
 workbox.routing.registerRoute(
 	/^http.*/,
@@ -59,4 +59,4 @@ workbox.routing.registerRoute(
 		cacheName: 'http-cache'
 	}),
 	'GET'
-)
+);
