@@ -1,14 +1,21 @@
 import 'isomorphic-fetch';
 import React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import Fork from '../components/Fork';
 import Todo from '../components/Todo';
+
+const Title = styled.h1`
+	color: red;
+`;
 
 // Port in to using useState hooks, if you need state
 const Index = ({ stars }) => (
 	<div>
 		<Fork stars={stars} />
+
+		<Title>My First Next.js Page</Title>
 		<div>
 			<Todo />
 		</div>
