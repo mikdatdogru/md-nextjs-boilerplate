@@ -179,4 +179,5 @@ typings/
 .DS_Store
 .idea/
 .next/
+storybook-static/
 
