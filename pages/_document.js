@@ -3,12 +3,17 @@ import Document, { Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 export default class MyDocument extends Document {
-	static getInitialProps({ renderPage }) {
+	static async getInitialProps(context) {
+		const propsx = await super.getInitialProps(context);
+		const {
+			req: { locale, localeDataScript }
+		} = context;
+
 		// Step 1: Create an instance of ServerStyleSheet
 		const sheet = new ServerStyleSheet();
 
 		// Step 2: Retrieve styles from components in the page
-		const page = renderPage(App => props =>
+		const page = context.renderPage(App => props =>
 			sheet.collectStyles(<App {...props} />)
 		);
 
@@ -16,10 +21,13 @@ export default class MyDocument extends Document {
 		const styleTags = sheet.getStyleElement();
 
 		// Step 4: Pass styleTags as a prop
-		return { ...page, styleTags };
+		// todo: propsx ile page ayni oalbilir mi ?
+		return { ...page, styleTags, ...propsx, locale, localeDataScript };
 	}
 
 	render() {
+		const polyfill = `https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.${this.props.locale}`;
+
 		return (
 			// eslint-disable-next-line jsx-a11y/html-has-lang
 			<html style={{ background: '#EEE', color: '#444' }}>
@@ -43,7 +51,13 @@ export default class MyDocument extends Document {
 				</Head>
 				<body>
 					<Main />
+					<script src={polyfill} />
 					<NextScript />
+					<script
+						dangerouslySetInnerHTML={{
+							__html: this.props.localeDataScript
+						}}
+					/>
 					<script defer src="https://code.getmdl.io/1.3.0/material.min.js" />
 				</body>
 			</html>

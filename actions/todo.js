@@ -1,4 +1,4 @@
-import { ADD_TODO, REMOVE_TODO } from '.';
+import { ADD_TODO, REMOVE_TODO } from './index';
 
 export function addTodo(text) {
 	return {
