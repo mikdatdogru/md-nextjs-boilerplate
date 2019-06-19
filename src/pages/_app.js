@@ -15,34 +15,31 @@ if (typeof window !== 'undefined' && window.ReactIntlLocaleData) {
 	});
 }
 
-
-// eslint-disable-next-line global-require
-const getMessages = (locale = "en") => require(`../lang/${locale}.json`);
+// eslint-disable-next-line
+const getMessages = (locale = 'en') => require(`../lang/${locale}.json`);
 
 /* debug to log how the store is being used */
 export default withRedux(initStore, {
-	debug: typeof window !== 'undefined' && process.env.NODE_ENV !== 'production'
+	debug: typeof window !== 'undefined' && process.env.NODE_ENV !== 'production',
 })(
 	class MyApp extends App {
 		constructor(props) {
 			super(props);
 			this.state = {
-				locale: 'en'
+				locale: 'en',
 			};
 		}
 
 		setLocale = locale => {
 			this.setState({
-				locale
+				locale,
 			});
 		};
 
 		static async getInitialProps({ Component, ctx }) {
 			const pageProps = {
 				// Call page-level getInitialProps
-				...(Component.getInitialProps
-					? await Component.getInitialProps(ctx)
-					: {})
+				...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
 			};
 			const { req } = ctx;
 			// eslint-disable-next-line no-underscore-dangle
@@ -53,14 +50,7 @@ export default withRedux(initStore, {
 		}
 
 		render() {
-			const {
-				Component,
-				pageProps,
-				locale,
-				messages,
-				store,
-				initialNow
-			} = this.props;
+			const { Component, pageProps, locale, messages, store, initialNow } = this.props;
 
 			return (
 				<Container>
@@ -70,10 +60,7 @@ export default withRedux(initStore, {
 					<Provider store={store}>
 						<IntlProvider
 							locale={this.state.locale || locale}
-							messages={
-								(this.state.locale && getMessages(this.state.locale)) ||
-								messages
-							}
+							messages={(this.state.locale && getMessages(this.state.locale)) || messages}
 							initialNow={initialNow}
 						>
 							<Component setLocale={this.setLocale} {...pageProps} />
@@ -82,5 +69,5 @@ export default withRedux(initStore, {
 				</Container>
 			);
 		}
-	}
+	},
 );

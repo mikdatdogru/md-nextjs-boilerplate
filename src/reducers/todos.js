@@ -11,8 +11,8 @@ export default function(state = [], action) {
 					id: Math.random()
 						.toString(36)
 						.substring(2),
-					text
-				}
+					text,
+				},
 			];
 		case REMOVE_TODO:
 			return state.filter(i => i !== todo);

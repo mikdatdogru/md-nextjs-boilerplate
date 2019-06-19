@@ -180,6 +180,6 @@ typings/
 .idea/
 .next/
 storybook-static/
-lang/.messages/
+src/lang/.messages/
 
 

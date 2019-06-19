@@ -6,12 +6,9 @@ const enhancers = compose(
 	typeof window !== 'undefined' && process.env.NODE_ENV !== 'production'
 		? window.__REDUX_DEVTOOLS_EXTENSION__ &&
 				window.__REDUX_DEVTOOLS_EXTENSION__({ serialize: true, trace: true })
-		: f => f
+		: f => f,
 );
 /* eslint-enable */
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
-export default initialState =>
-	createStoreWithMiddleware(rootReducer, initialState, enhancers);
-
-
+export default initialState => createStoreWithMiddleware(rootReducer, initialState, enhancers);

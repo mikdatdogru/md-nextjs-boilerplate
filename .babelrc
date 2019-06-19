@@ -19,7 +19,7 @@
 				[
 					"react-intl",
 					{
-						"messagesDir": "lang/.messages/"
+						"messagesDir": "src/lang/.messages/"
 					}
 				]
 			]

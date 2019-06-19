@@ -75,5 +75,5 @@ const Todo = ({ todos, addTodo, removeTodo }) => {
 
 export default connect(
 	({ todos }) => ({ todos }),
-	{ addTodo, removeTodo }
+	{ addTodo, removeTodo },
 )(Todo);
