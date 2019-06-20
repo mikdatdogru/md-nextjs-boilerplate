@@ -2,15 +2,10 @@ import 'isomorphic-fetch';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
-import Fork from '../components/Fork';
 import Todo from '../components/Todo';
 import withIntl from '../lib/withIntl';
 
-const Title = styled.h1`
-	color: red;
-`;
 
 // Port in to using useState hooks, if you need state
 class Index extends React.Component {
@@ -19,25 +14,16 @@ class Index extends React.Component {
 		this.state = {};
 	}
 
-	setLocale = lang => {
-		this.props.setLocale(lang);
-	};
-
 	render() {
+
 		return (
 			<div>
 				<div>
 					<FormattedMessage id="greeting" defaultMessage="Hello, Worlds!" />
-
-					<div>
-						<div onClick={() => this.setLocale('en')}>EN</div>
-						<div onClick={() => this.setLocale('es')}>ES</div>
-					</div>
 				</div>
 
-				<Fork stars={this.props.stars} />
 
-				<Title>My First Next.js Page</Title>
+				<div>Hello Next</div>
 				<div>
 					<Todo />
 				</div>

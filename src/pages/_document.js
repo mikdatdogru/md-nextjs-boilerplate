@@ -39,10 +39,7 @@ export default class MyDocument extends Document {
 					<meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 					<link rel="manifest" href="static/manifest.json" />
 					<link rel="icon" href="static/img/favicon.ico" />
-					<link
-						rel="stylesheet"
-						href="https://code.getmdl.io/1.3.0/material.deep_purple-blue.min.css"
-					/>
+
 					{this.props.styleTags}
 				</Head>
 				<body>
@@ -54,7 +51,6 @@ export default class MyDocument extends Document {
 							__html: this.props.localeDataScript,
 						}}
 					/>
-					<script defer src="https://code.getmdl.io/1.3.0/material.min.js" />
 				</body>
 			</html>
 		);
